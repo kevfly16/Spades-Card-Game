@@ -22,8 +22,8 @@ public class Window extends JFrame {
 
 	// constructor for the Window class used to create the GUI
 	public Window(int x, int y) {
-		this.setSize(x, y);
-		this.setLayout(new GridLayout(2, 1));
+		setSize(x, y);
+		setLayout(new GridLayout(2, 1));
 		playerPanel = new JPanel();
 		teammatePanel = new JPanel();
 		opponent1Panel = new JPanel();
@@ -118,8 +118,8 @@ public class Window extends JFrame {
 		panelTop.add(opponent2Panel);
 		panelBottom.add(opponent1Panel);
 		panelBottom.add(playerPanel);
-		this.add(panelTop);
-		this.add(panelBottom);
+		add(panelTop);
+		add(panelBottom);
 		setVisible(true);
 		repaint();
 	}

@@ -776,6 +776,7 @@ public class Game implements ActionListener {
 		int currentIndex = 0;
 		for (int i = playerHand.length - 1; i >= 0; i--) {
 			currentMin = 0;
+			currentIndex = 0;
 			for (int j = i; j >= 0; j--) {
 				if (compareCards(playerHand[j][0], currentMin)) {
 					currentMin = playerHand[j][0];
@@ -783,9 +784,10 @@ public class Game implements ActionListener {
 				}
 			}
 
-			int temp = playerHand[i][0];
-			playerHand[i][0] = currentMin;
-			playerHand[currentIndex][0] = temp;
+			if(currentIndex != i){
+				playerHand[currentIndex][0] = playerHand[i][0];
+				playerHand[i][0] = currentMin;
+			}
 		}
 
 		return playerHand;
