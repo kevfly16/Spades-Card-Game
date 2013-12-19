@@ -26,10 +26,8 @@ public class Game implements ActionListener {
 	int[][] previousCards = new int[52][1];
 	int[][] cardsRemoved = new int[52][1];
 	int[][] playerHand, teammateHand, opponent1Hand, opponent2Hand;
-	int[][] playerHandStatic, teammateHandStatic, opponent1HandStatic,
-			opponent2HandStatic;
 	int[][] cardsViewed = new int[13][1];
-	int cardsTaken, bid, noCards = 0, cardsOut = 0, noTurn = 0,
+	int bid, noCards = 0, cardsOut = 0, noTurn = 0,
 			bidTakenPlayer = 0, bidTakenTeammate = 0, bidTakenOpponent1 = 0,
 			bidTakenOpponent2 = 0, moves = 1;
 	int[][] currentCards = new int[4][2];
@@ -70,10 +68,6 @@ public class Game implements ActionListener {
 		teammateHand = generateCard(previousCards, noCards, 0, teammateHand);
 		opponent1Hand = generateCard(previousCards, noCards, 0, opponent1Hand);
 		opponent2Hand = generateCard(previousCards, noCards, 0, opponent2Hand);
-		playerHandStatic = playerHand;
-		teammateHandStatic = teammateHand;
-		opponent1HandStatic = opponent1Hand;
-		opponent2HandStatic = opponent2Hand;
 		window.playerScoreLabel.setText("Score: " + scorePlayer);
 		window.opponentScoreLabel.setText("Score: " + scoreOpponent);
 		window.playerBagsLabel.setText("Bags: " + playerBags);
@@ -255,6 +249,9 @@ public class Game implements ActionListener {
 		if (bid.equals("bid")) {
 			frame.dispose();
 			if (turn == 0) {
+				window.opponent1Label.setText("Bid: 0/" + bidOpponent1);
+				window.teammateLabel.setText("Bid: 0/" + bidTeammate);
+				window.opponent2Label.setText("Bid: 0/" + bidOpponent2);
 				playerGoFirst();
 			}
 			if (turn == 1) {
@@ -262,9 +259,12 @@ public class Game implements ActionListener {
 			}
 
 			if (turn == 2) {
+				window.opponent1Label.setText("Bid: 0/" + bidOpponent1);
 				teammateGo();
 			}
 			if (turn == 3) {
+				window.opponent1Label.setText("Bid: 0/" + bidOpponent1);
+				window.teammateLabel.setText("Bid: 0/" + bidTeammate);
 				opponent2Go();
 			}
 		}
@@ -880,7 +880,9 @@ public class Game implements ActionListener {
 		if (bidTeammate < 0) {
 			bidTeammate = 0;
 		}
-		window.teammateLabel.setText("Bid: 0/" + bidTeammate);
+		
+		if(turn == 1 || turn == 2)
+			window.teammateLabel.setText("Bid: 0/" + bidTeammate);
 	}
 
 	// determines the bid opponent1 calls
@@ -940,7 +942,9 @@ public class Game implements ActionListener {
 		if (bidOpponent1 < 0) {
 			bidOpponent1 = 0;
 		}
-		window.opponent1Label.setText("Bid: 0/" + bidOpponent1);
+		
+		if(turn == 1)
+			window.opponent1Label.setText("Bid: 0/" + bidOpponent1);
 	}
 
 	// determines the bid opponent2 calls
@@ -1000,7 +1004,9 @@ public class Game implements ActionListener {
 		if (bidOpponent2 < 0) {
 			bidOpponent2 = 0;
 		}
-		window.opponent2Label.setText("Bid: 0/" + bidOpponent2);
+		
+		if(turn >= 1)
+			window.opponent2Label.setText("Bid: 0/" + bidOpponent2);
 	}
 
 	// determines the card played if teammate goes first
@@ -1339,7 +1345,7 @@ public class Game implements ActionListener {
 	// determines the next move after a card is played
 	public void move(String a) {
 		noTurn++;
-		if (moves == 14) {
+		if (moves > 13) {
 			if ((turn + 1) > 3)
 				turn = 0;
 			else {
