@@ -27,9 +27,9 @@ public class Game implements ActionListener {
 	int[][] cardsRemoved = new int[52][1];
 	int[][] playerHand, teammateHand, opponent1Hand, opponent2Hand;
 	int[][] cardsViewed = new int[13][1];
-	int bid, noCards = 0, cardsOut = 0, noTurn = 0,
-			bidTakenPlayer = 0, bidTakenTeammate = 0, bidTakenOpponent1 = 0,
-			bidTakenOpponent2 = 0, moves = 1;
+	int bid, noCards = 0, cardsOut = 0, noTurn = 0, bidTakenPlayer = 0,
+			bidTakenTeammate = 0, bidTakenOpponent1 = 0, bidTakenOpponent2 = 0,
+			moves = 1;
 	int[][] currentCards = new int[4][2];
 	double bidTeammate = 0, bidOpponent1 = 0, bidOpponent2 = 0;
 	JLabel[] cardsViewPlayer = new JLabel[13];
@@ -784,7 +784,7 @@ public class Game implements ActionListener {
 				}
 			}
 
-			if(currentIndex != i){
+			if (currentIndex != i) {
 				playerHand[currentIndex][0] = playerHand[i][0];
 				playerHand[i][0] = currentMin;
 			}
@@ -882,8 +882,8 @@ public class Game implements ActionListener {
 		if (bidTeammate < 0) {
 			bidTeammate = 0;
 		}
-		
-		if(turn == 1 || turn == 2)
+
+		if (turn == 1 || turn == 2)
 			window.teammateLabel.setText("Bid: 0/" + bidTeammate);
 	}
 
@@ -944,8 +944,8 @@ public class Game implements ActionListener {
 		if (bidOpponent1 < 0) {
 			bidOpponent1 = 0;
 		}
-		
-		if(turn == 1)
+
+		if (turn == 1)
 			window.opponent1Label.setText("Bid: 0/" + bidOpponent1);
 	}
 
@@ -1006,8 +1006,8 @@ public class Game implements ActionListener {
 		if (bidOpponent2 < 0) {
 			bidOpponent2 = 0;
 		}
-		
-		if(turn >= 1)
+
+		if (turn >= 1)
 			window.opponent2Label.setText("Bid: 0/" + bidOpponent2);
 	}
 
@@ -1137,7 +1137,7 @@ public class Game implements ActionListener {
 				}
 			}
 			move("opponent1");
-			
+
 		} else if (playerGo) {
 			if ((currentCards[0][0] - 1) % 4 == 0)
 				suit = 1;
@@ -1149,7 +1149,8 @@ public class Game implements ActionListener {
 				suit = 4;
 
 			for (int i = 0; i < playerHand.length; i++) {
-				if (((playerHand[i][0] - suit) % 4 == 0)&&(playerHand[i][0]>0))
+				if (((playerHand[i][0] - suit) % 4 == 0)
+						&& (playerHand[i][0] > 0))
 					hasCard = true;
 			}
 
@@ -1471,11 +1472,11 @@ public class Game implements ActionListener {
 				if (bidTakenPlayer == 0)
 					return 100;
 				else {
-					playerBags = bidTakenPlayer - (int) bid;
+					playerBags += bidTakenPlayer - (int) bid;
 					return -100;
 				}
 			} else {
-				playerBags = bidTakenPlayer - (int) bid;
+				playerBags += bidTakenPlayer - (int) bid;
 				return bid * 10;
 			}
 		} else {
@@ -1491,11 +1492,11 @@ public class Game implements ActionListener {
 				if (bidTakenTeammate == 0)
 					return 100;
 				else {
-					playerBags = bidTakenTeammate - (int) bidTeammate;
+					playerBags += bidTakenTeammate - (int) bidTeammate;
 					return -100;
 				}
 			} else {
-				playerBags = bidTakenTeammate - (int) bidTeammate;
+				playerBags += bidTakenTeammate - (int) bidTeammate;
 				return (int) bidTeammate * 10;
 			}
 		} else {
@@ -1510,11 +1511,11 @@ public class Game implements ActionListener {
 				if (bidTakenOpponent1 == 0)
 					return 100;
 				else {
-					opponentBags = bidTakenOpponent1 - (int) bidOpponent1;
+					opponentBags += bidTakenOpponent1 - (int) bidOpponent1;
 					return -100;
 				}
 			} else {
-				opponentBags = bidTakenOpponent1 - (int) bidOpponent1;
+				opponentBags += bidTakenOpponent1 - (int) bidOpponent1;
 				return (int) bidOpponent1 * 10;
 			}
 		} else {
@@ -1529,11 +1530,11 @@ public class Game implements ActionListener {
 				if (bidTakenOpponent2 == 0)
 					return 100;
 				else {
-					opponentBags = bidTakenOpponent2 - (int) bidOpponent2;
+					opponentBags += bidTakenOpponent2 - (int) bidOpponent2;
 					return -100;
 				}
 			} else {
-				opponentBags = bidTakenOpponent2 - (int) bidOpponent2;
+				opponentBags += bidTakenOpponent2 - (int) bidOpponent2;
 				return (int) bidOpponent2 * 10;
 			}
 		} else {
@@ -1543,8 +1544,8 @@ public class Game implements ActionListener {
 
 	// decreases score of player if more than 10 bags
 	public int getPlayerBags() {
-		if (playerBags == 10) {
-			playerBags = 0;
+		if (playerBags >= 10) {
+			playerBags = playerBags - 10;
 			return -100;
 		} else
 			return 0;
@@ -1552,8 +1553,8 @@ public class Game implements ActionListener {
 
 	// decreases score of opponent if more than 10 bags
 	public int getOpponentBags() {
-		if (opponentBags == 10) {
-			opponentBags = 0;
+		if (opponentBags >= 10) {
+			opponentBags = opponentBags - 10;
 			return -100;
 		} else
 			return 0;
