@@ -1477,7 +1477,7 @@ public class Game implements ActionListener {
 				}
 			} else {
 				playerBags += bidTakenPlayer - (int) bid;
-				return bid * 10;
+				return bid * 10 + (bidTakenPlayer - (int) bid);
 			}
 		} else {
 			return -bid * 10;
@@ -1497,7 +1497,8 @@ public class Game implements ActionListener {
 				}
 			} else {
 				playerBags += bidTakenTeammate - (int) bidTeammate;
-				return (int) bidTeammate * 10;
+				return (int) bidTeammate * 10
+						+ (bidTakenTeammate - (int) bidTeammate);
 			}
 		} else {
 			return (int) -bidTeammate * 10;
@@ -1516,7 +1517,8 @@ public class Game implements ActionListener {
 				}
 			} else {
 				opponentBags += bidTakenOpponent1 - (int) bidOpponent1;
-				return (int) bidOpponent1 * 10;
+				return (int) bidOpponent1 * 10
+						+ (bidTakenOpponent1 - (int) bidOpponent1);
 			}
 		} else {
 			return (int) -bidOpponent1 * 10;
@@ -1535,7 +1537,8 @@ public class Game implements ActionListener {
 				}
 			} else {
 				opponentBags += bidTakenOpponent2 - (int) bidOpponent2;
-				return (int) bidOpponent2 * 10;
+				return (int) bidOpponent2 * 10
+						+ (bidTakenOpponent2 - (int) bidOpponent2);
 			}
 		} else {
 			return (int) -bidOpponent2 * 10;
