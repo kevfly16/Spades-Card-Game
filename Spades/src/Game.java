@@ -1210,7 +1210,17 @@ public class Game implements ActionListener {
 
 	// method used to allow player to go
 	public void playerGo() {
-		playerGo = true;
+		boolean a = true;
+		for(int i = 0; i < playerHand.length; i++){
+			if(playerHand[i][0] != 0)
+				a = false;
+		}
+		
+		if(a){
+			moves = 14;
+			move("p");
+		} else
+			playerGo = true;
 	}
 
 	public void playerGoFirst() {
@@ -1348,7 +1358,7 @@ public class Game implements ActionListener {
 	// determines the next move after a card is played
 	public void move(String a) {
 		noTurn++;
-		if (moves > 13) {
+		if (moves == 14) {
 			if ((turn + 1) > 3)
 				turn = 0;
 			else {
